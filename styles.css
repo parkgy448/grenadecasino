@@ -53,7 +53,7 @@ body::before {
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 70% 30%, rgba(46, 204, 113, 0.05) 0%, transparent 50%), radial-gradient(circle at 30% 70%, rgba(241, 196, 15, 0.05) 0%, transparent 50%),
-        repeating-radial-gradient(circle at center, rgba(46, 204, 113, 0.015) 0px, transparent 200px);
+    repeating-radial-gradient(circle at center, rgba(46, 204, 113, 0.015) 0px, transparent 200px);
     animation: bgPulse 12s ease-in-out infinite;
     pointer-events: none;
     z-index: -2;
@@ -1516,7 +1516,7 @@ header + .gx-marquee {
     will-change: transform;
 }
 .gx-marquee:hover .gx-marquee__track {
-    animation-play-state: paused;
+    animation-play-state: running;
 }
 
 @keyframes gx-marquee-scroll {
@@ -1618,39 +1618,39 @@ header + .gx-marquee {
 
 /* ===== Auth Button Layout Only (no color/style changes) ===== */
 .header .auth-buttons {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  justify-content: flex-end;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
 }
 
 @media (max-width: 450px) {
-  .header .auth-buttons {
-    width: 100%;
-    justify-content: center;
-    margin-top: 10px;
-  }
-  .header .auth-buttons .auth-btn {
-    flex: 1 1 42%;
-    max-width: 160px;
-  }
+    .header .auth-buttons {
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    .header .auth-buttons .auth-btn {
+        flex: 1 1 42%;
+        max-width: 160px;
+    }
 }
 
 
 /* ===== Header 3-column layout & hamburger (layout only) ===== */
 
 .header .menu-toggle{
-  width:40px;height:40px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:6px;
-  background:rgba(0,0,0,.25);
-  display:inline-flex;flex-direction:column;justify-content:center;align-items:center;
-  gap:5px;
-  cursor:pointer;
+    width:40px;height:40px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:6px;
+    background:rgba(0,0,0,.25);
+    display:inline-flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:5px;
+    cursor:pointer;
 }
 .header .menu-toggle span{
-  display:block;width:20px;height:2px;background:#fff;border-radius:2px;
+    display:block;width:20px;height:2px;background:#fff;border-radius:2px;
 }
 
 /* Center title in the middle column */
@@ -1658,7 +1658,7 @@ header + .gx-marquee {
 
 /* Small screens: keep as is */
 @media (max-width:450px){
-  .header-inner{ grid-template-columns:40px 1fr auto; }
+    .header-inner{ grid-template-columns:40px 1fr auto; }
 }
 
 /* Placeholder side menu hidden by default */
@@ -1671,26 +1671,26 @@ header + .gx-marquee {
 
 /* Hamburger: absolutely positioned at the far left */
 .header .menu-toggle{
-  position:absolute; left:12px; top:50%; transform:translateY(-50%);
-  width:36px; height:36px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:6px;
-  background:transparent;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:5px; cursor:pointer;
-  z-index:2; /* stay above header shine */
+    position:absolute; left:12px; top:50%; transform:translateY(-50%);
+    width:36px; height:36px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:6px;
+    background:transparent;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:5px; cursor:pointer;
+    z-index:2; /* stay above header shine */
 }
 .header .menu-toggle span{ display:block; width:20px; height:2px; background:#fff; border-radius:2px; }
 
 /* Center the title visually regardless of the right button widths */
 .header h1{
-  position:absolute; left:50%; transform:translateX(-50%);
-  margin:0; /* keep existing font styles intact */
+    position:absolute; left:50%; transform:translateX(-50%);
+    margin:0; /* keep existing font styles intact */
 }
 
 /* Small screens: keep same behavior */
 @media (max-width: 450px){
-  .header .menu-toggle{ left:8px; width:34px; height:34px; }
+    .header .menu-toggle{ left:8px; width:34px; height:34px; }
 }
 
 
@@ -1698,53 +1698,53 @@ header + .gx-marquee {
 .header-inner { position: relative; } /* keep existing flex; no layout changes elsewhere */
 
 .header .menu-toggle {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 6px;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  cursor: pointer;
-  z-index: 2;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 6px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 2;
 }
 .header .menu-toggle span { width: 20px; height: 2px; background: #fff; border-radius: 2px; display: block; }
 
 /* center the title visually regardless of button widths */
 .header h1 {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* small tweak for very small screens */
 @media (max-width: 450px) {
-  .header .menu-toggle { left: 8px; width: 34px; height: 34px; }
+    .header .menu-toggle { left: 8px; width: 34px; height: 34px; }
 }
 
 
 /* === Auth buttons: layout like reference (no color changes) === */
 /* Desktop: keep as-is (right aligned). Mobile: center on its own row below title */
 @media (max-width: 450px){
-  .header .auth-buttons{
-    position: relative;
-    width:100%;
-    justify-content:center;
-    margin-top: 8px;   /* ensure it sits below the title */
-    gap:10px;
-  }
-  .header .auth-buttons .auth-btn{
-    border-radius:12px;      /* only shape, keep theme colors */
-    padding:10px 16px;
-    min-width:118px;
-  }
+    .header .auth-buttons{
+        position: relative;
+        width:100%;
+        justify-content:center;
+        margin-top: 8px;   /* ensure it sits below the title */
+        gap:10px;
+    }
+    .header .auth-buttons .auth-btn{
+        border-radius:12px;      /* only shape, keep theme colors */
+        padding:10px 16px;
+        min-width:118px;
+    }
 }
 
 /* micro-fix to prevent overlap with absolute-centered title */
@@ -1755,24 +1755,24 @@ header + .gx-marquee {
 
 /* === Auth Buttons: pill design, green background (photo reference) === */
 .auth-btn {
-  background: var(--grenade-green);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 28px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+    background: var(--grenade-green);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    padding: 10px 28px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
 }
 .auth-btn:hover {
-  background: var(--grenade-dark-green);
-  box-shadow: 0 6px 18px rgba(46, 204, 113, 0.6);
-  transform: translateY(-2px);
+    background: var(--grenade-dark-green);
+    box-shadow: 0 6px 18px rgba(46, 204, 113, 0.6);
+    transform: translateY(-2px);
 }
 .auth-btn:active {
-  transform: scale(0.96);
+    transform: scale(0.96);
 }
 
 
@@ -1782,46 +1782,46 @@ header + .gx-marquee {
 
 /* Stack header content vertically */
 .header-inner{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    position:relative;
 }
 
 /* Center title normally (undo any absolute centering) */
 .header h1{
-  position: static;
-  transform: none;
-  margin: 0;
+    position: static;
+    transform: none;
+    margin: 0;
 }
 
 /* Place hamburger at the very left, vertically aligned with title */
 .header .menu-toggle{
-  position:absolute;
-  left:12px;
-  top:14px;
-  width:36px; height:36px;
-  border:1px solid rgba(255,255,255,.12);
-  border-radius:6px;
-  background:transparent;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:5px; cursor:pointer;
+    position:absolute;
+    left:12px;
+    top:14px;
+    width:36px; height:36px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:6px;
+    background:transparent;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:5px; cursor:pointer;
 }
 
 /* Second row: auth buttons centered, full-width container */
 .header .auth-buttons{
-  width:100%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
 }
 
 /* Keep wrapping nicely on small screens */
 @media (max-width:450px){
-  .header .auth-buttons .auth-btn{ flex:1 1 auto; min-width:120px; }
+    .header .auth-buttons .auth-btn{ flex:1 1 auto; min-width:120px; }
 }
 
 
@@ -1829,23 +1829,23 @@ header + .gx-marquee {
 :root { --header-h: 150px; }
 
 .header-inner{
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 .header .menu-toggle,
 .header .nav-back{
-  position: absolute;
-  top: 12px;
-  width: 36px; height: 36px;
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 6px;
-  background: transparent;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
+    position: absolute;
+    top: 12px;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 6px;
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
 }
 .header .menu-toggle{ left: 12px; }
 .header .menu-toggle span{ width:20px;height:2px;background:#fff;border-radius:2px; display:block; }
@@ -1853,31 +1853,106 @@ header + .gx-marquee {
 .header .nav-back{ left: 56px; font-size: 18px; line-height: 1; color:#fff; }
 
 .header h1{
-  position: static;
-  transform: none;
-  margin: 0;
+    position: static;
+    transform: none;
+    margin: 0;
 }
 
 .header .auth-buttons{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 @media (max-width: 450px){
-  .header .auth-buttons .auth-btn{ flex: 1 1 auto; min-width: 120px; }
+    .header .auth-buttons .auth-btn{ flex: 1 1 auto; min-width: 120px; }
 }
 
 
 /* === Fix: Keep game tabs side-by-side on small screens === */
 @media (max-width: 450px){
-  .game-tabs{
-    flex-direction: row !important;
-    flex-wrap: nowrap;
-  }
-  .game-tab{
-    margin-bottom: 0;
-  }
+    .game-tabs{
+        flex-direction: row !important;
+        flex-wrap: nowrap;
+    }
+    .game-tab{
+        margin-bottom: 0;
+    }
 }
+
+
+.header .auth-buttons{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100vw;                           /* viewport full width */
+    margin-left: calc(50% - 50vw);          /* full-bleed (no side margins) */
+    margin-right: calc(50% - 50vw);
+    padding: 0;
+    box-sizing: border-box;
+}
+.header .auth-buttons .auth-btn{
+    width: 100%;                             /* stretch each cell */
+    justify-content: center;
+}
+/* keep it even on very small screens */
+@media (max-width: 350px){
+    .header .auth-buttons{ gap: 6px; }
+    .header .auth-buttons .auth-btn{ padding: 10px 8px; }
+}
+
+/* === Auth bar: two buttons full-bleed with slight side margins === */
+.header .auth-buttons{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    margin: 0;
+    padding: 0 12px;          /* slight left/right padding */
+    box-sizing: border-box;
+}
+.header .auth-buttons .auth-btn{
+    width: 100%;
+    justify-content: center;
+}
+@media (max-width: 350px){
+    .header .auth-buttons{ gap: 6px; padding: 0 8px; }
+    .header .auth-buttons .auth-btn{ padding: 10px 8px; }
+}
+
+
+/* === Auth Buttons with Icons === */
+.auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;                        /* 아이콘과 텍스트 간격 */
+    font-family: "Noto Sans KR", sans-serif;  /* 사진과 비슷한 깔끔한 한글 폰트 */
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* 로그인 버튼 아이콘 */
+#loginBtn::before {
+    content: "\f090";               /* Font Awesome: fa-sign-in-alt */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+}
+
+/* 회원가입 버튼 아이콘 */
+#registerBtn::before {
+    content: "\f234";               /* Font Awesome: fa-user-plus */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 14px;
+}
+
+
+/* === Global Font: apply Noto Sans KR site-wide === */
+body, h1, h2, h3, h4, h5, h6, button, input, textarea {
+    font-family: "Noto Sans KR", sans-serif !important;
+}
+
