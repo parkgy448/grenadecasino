@@ -223,7 +223,7 @@ body::after {
     font-weight: 600;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 450px) {
     .header-inner {
         flex-direction: column;
         align-items: center;
@@ -1270,7 +1270,7 @@ body::after {
 }
 
 /* 반응형 디자인 */
-@media (max-width: 420px) {
+@media (max-width: 450px) {
     .admin-stats {
         grid-template-columns: 1fr 1fr;
     }
@@ -1287,7 +1287,7 @@ body::after {
     }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 450px) {
     .admin-stats {
         grid-template-columns: 1fr;
     }
@@ -1428,7 +1428,7 @@ body {
 }
 
 /* 반응형 조정 */
-@media (max-width: 420px) {
+@media (max-width: 450px) {
     .header h1 {
         font-size: 24px;
     }
@@ -1625,7 +1625,7 @@ header + .gx-marquee {
   flex-wrap: wrap;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 450px) {
   .header .auth-buttons {
     width: 100%;
     justify-content: center;
@@ -1634,5 +1634,250 @@ header + .gx-marquee {
   .header .auth-buttons .auth-btn {
     flex: 1 1 42%;
     max-width: 160px;
+  }
+}
+
+
+/* ===== Header 3-column layout & hamburger (layout only) ===== */
+
+.header .menu-toggle{
+  width:40px;height:40px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:6px;
+  background:rgba(0,0,0,.25);
+  display:inline-flex;flex-direction:column;justify-content:center;align-items:center;
+  gap:5px;
+  cursor:pointer;
+}
+.header .menu-toggle span{
+  display:block;width:20px;height:2px;background:#fff;border-radius:2px;
+}
+
+/* Center title in the middle column */
+.header h1{ justify-self:center; }
+
+/* Small screens: keep as is */
+@media (max-width:450px){
+  .header-inner{ grid-template-columns:40px 1fr auto; }
+}
+
+/* Placeholder side menu hidden by default */
+.side-menu[hidden]{ display:none !important; }
+
+
+/* === Header-only tweaks (safe) === */
+/* Keep original flex layout; just make it a positioning context */
+.header-inner { position: relative; }
+
+/* Hamburger: absolutely positioned at the far left */
+.header .menu-toggle{
+  position:absolute; left:12px; top:50%; transform:translateY(-50%);
+  width:36px; height:36px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:6px;
+  background:transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:5px; cursor:pointer;
+  z-index:2; /* stay above header shine */
+}
+.header .menu-toggle span{ display:block; width:20px; height:2px; background:#fff; border-radius:2px; }
+
+/* Center the title visually regardless of the right button widths */
+.header h1{
+  position:absolute; left:50%; transform:translateX(-50%);
+  margin:0; /* keep existing font styles intact */
+}
+
+/* Small screens: keep same behavior */
+@media (max-width: 450px){
+  .header .menu-toggle{ left:8px; width:34px; height:34px; }
+}
+
+
+/* === Header-only: center title like screenshot + left hamburger === */
+.header-inner { position: relative; } /* keep existing flex; no layout changes elsewhere */
+
+.header .menu-toggle {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 6px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  z-index: 2;
+}
+.header .menu-toggle span { width: 20px; height: 2px; background: #fff; border-radius: 2px; display: block; }
+
+/* center the title visually regardless of button widths */
+.header h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* small tweak for very small screens */
+@media (max-width: 450px) {
+  .header .menu-toggle { left: 8px; width: 34px; height: 34px; }
+}
+
+
+/* === Auth buttons: layout like reference (no color changes) === */
+/* Desktop: keep as-is (right aligned). Mobile: center on its own row below title */
+@media (max-width: 450px){
+  .header .auth-buttons{
+    position: relative;
+    width:100%;
+    justify-content:center;
+    margin-top: 8px;   /* ensure it sits below the title */
+    gap:10px;
+  }
+  .header .auth-buttons .auth-btn{
+    border-radius:12px;      /* only shape, keep theme colors */
+    padding:10px 16px;
+    min-width:118px;
+  }
+}
+
+/* micro-fix to prevent overlap with absolute-centered title */
+.header h1{ z-index:1; }
+.header .menu-toggle{ z-index:2; }
+.header .auth-buttons{ z-index:1; }
+
+
+/* === Auth Buttons: pill design, green background (photo reference) === */
+.auth-btn {
+  background: var(--grenade-green);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 28px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(46, 204, 113, 0.4);
+}
+.auth-btn:hover {
+  background: var(--grenade-dark-green);
+  box-shadow: 0 6px 18px rgba(46, 204, 113, 0.6);
+  transform: translateY(-2px);
+}
+.auth-btn:active {
+  transform: scale(0.96);
+}
+
+
+/* === HEADER LAYOUT: match reference (logo centered, buttons in second row, hamburger left) === */
+/* Increase header offset so content doesn't hide behind fixed header */
+:root { --header-h: 150px; }
+
+/* Stack header content vertically */
+.header-inner{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  position:relative;
+}
+
+/* Center title normally (undo any absolute centering) */
+.header h1{
+  position: static;
+  transform: none;
+  margin: 0;
+}
+
+/* Place hamburger at the very left, vertically aligned with title */
+.header .menu-toggle{
+  position:absolute;
+  left:12px;
+  top:14px;
+  width:36px; height:36px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:6px;
+  background:transparent;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:5px; cursor:pointer;
+}
+
+/* Second row: auth buttons centered, full-width container */
+.header .auth-buttons{
+  width:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+}
+
+/* Keep wrapping nicely on small screens */
+@media (max-width:450px){
+  .header .auth-buttons .auth-btn{ flex:1 1 auto; min-width:120px; }
+}
+
+
+/* === HEADER LAYOUT (match provided screenshot) === */
+:root { --header-h: 150px; }
+
+.header-inner{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.header .menu-toggle,
+.header .nav-back{
+  position: absolute;
+  top: 12px;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 6px;
+  background: transparent;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+}
+.header .menu-toggle{ left: 12px; }
+.header .menu-toggle span{ width:20px;height:2px;background:#fff;border-radius:2px; display:block; }
+.header .menu-toggle span + span{ margin-top:5px; }
+.header .nav-back{ left: 56px; font-size: 18px; line-height: 1; color:#fff; }
+
+.header h1{
+  position: static;
+  transform: none;
+  margin: 0;
+}
+
+.header .auth-buttons{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 450px){
+  .header .auth-buttons .auth-btn{ flex: 1 1 auto; min-width: 120px; }
+}
+
+
+/* === Fix: Keep game tabs side-by-side on small screens === */
+@media (max-width: 450px){
+  .game-tabs{
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+  }
+  .game-tab{
+    margin-bottom: 0;
   }
 }
