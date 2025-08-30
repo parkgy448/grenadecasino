@@ -1793,7 +1793,7 @@ async function viewUserInfo(e) {
     const todayCb = popup.querySelector("#dontShowToday");
 
     const HIDE_KEY = "hideTetherPopupUntil";
-    const DEFAULT_IMG = "https://i.ibb.co/rKtvvcRD/6075767806617567488.jpg";
+    const DEFAULT_IMG = "https://i.ibb.co/b5PtJw1B/photo-2025-08-30-22-27-39.jpg";
 
     const todayStr = () => new Date().toISOString().slice(0, 10);
     const shouldHide = () => localStorage.getItem(HIDE_KEY) === todayStr();
