@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap");
 :root {
     --header-h: 90px;
     --grenade-green: #2ecc71;
@@ -189,7 +190,7 @@ body::after {
     background: linear-gradient(135deg, var(--grenade-green) 0%, var(--grenade-dark-green) 100%);
     color: #0a0a0a;
     padding: 8px 22px;
-    border-radius: 5px;
+    border-radius: 9px !important;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -1637,65 +1638,100 @@ header + .gx-marquee {
     }
 }
 
-
 /* ===== Header 3-column layout & hamburger (layout only) ===== */
 
-.header .menu-toggle{
-    width:40px;height:40px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:6px;
-    background:rgba(0,0,0,.25);
-    display:inline-flex;flex-direction:column;justify-content:center;align-items:center;
-    gap:5px;
-    cursor:pointer;
+.header .menu-toggle {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.25);
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
 }
-.header .menu-toggle span{
-    display:block;width:20px;height:2px;background:#fff;border-radius:2px;
+.header .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
 }
 
 /* Center title in the middle column */
-.header h1{ justify-self:center; }
+.header h1 {
+    justify-self: center;
+}
 
 /* Small screens: keep as is */
-@media (max-width:450px){
-    .header-inner{ grid-template-columns:40px 1fr auto; }
+@media (max-width: 450px) {
+    .header-inner {
+        grid-template-columns: 40px 1fr auto;
+    }
 }
 
 /* Placeholder side menu hidden by default */
-.side-menu[hidden]{ display:none !important; }
-
+.side-menu[hidden] {
+    display: none !important;
+}
 
 /* === Header-only tweaks (safe) === */
 /* Keep original flex layout; just make it a positioning context */
-.header-inner { position: relative; }
+.header-inner {
+    position: relative;
+}
 
 /* Hamburger: absolutely positioned at the far left */
-.header .menu-toggle{
-    position:absolute; left:12px; top:50%; transform:translateY(-50%);
-    width:36px; height:36px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:6px;
-    background:transparent;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:5px; cursor:pointer;
-    z-index:2; /* stay above header shine */
+.header .menu-toggle {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 2; /* stay above header shine */
 }
-.header .menu-toggle span{ display:block; width:20px; height:2px; background:#fff; border-radius:2px; }
+.header .menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+}
 
 /* Center the title visually regardless of the right button widths */
-.header h1{
-    position:absolute; left:50%; transform:translateX(-50%);
-    margin:0; /* keep existing font styles intact */
+.header h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0; /* keep existing font styles intact */
 }
 
 /* Small screens: keep same behavior */
-@media (max-width: 450px){
-    .header .menu-toggle{ left:8px; width:34px; height:34px; }
+@media (max-width: 450px) {
+    .header .menu-toggle {
+        left: 8px;
+        width: 34px;
+        height: 34px;
+    }
 }
 
-
 /* === Header-only: center title like screenshot + left hamburger === */
-.header-inner { position: relative; } /* keep existing flex; no layout changes elsewhere */
+.header-inner {
+    position: relative;
+} /* keep existing flex; no layout changes elsewhere */
 
 .header .menu-toggle {
     position: absolute;
@@ -1704,7 +1740,7 @@ header + .gx-marquee {
     transform: translateY(-50%);
     width: 36px;
     height: 36px;
-    border: 1px solid rgba(255,255,255,.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
     background: transparent;
     display: flex;
@@ -1715,7 +1751,13 @@ header + .gx-marquee {
     cursor: pointer;
     z-index: 2;
 }
-.header .menu-toggle span { width: 20px; height: 2px; background: #fff; border-radius: 2px; display: block; }
+.header .menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    display: block;
+}
 
 /* center the title visually regardless of button widths */
 .header h1 {
@@ -1726,32 +1768,40 @@ header + .gx-marquee {
 
 /* small tweak for very small screens */
 @media (max-width: 450px) {
-    .header .menu-toggle { left: 8px; width: 34px; height: 34px; }
+    .header .menu-toggle {
+        left: 8px;
+        width: 34px;
+        height: 34px;
+    }
 }
-
 
 /* === Auth buttons: layout like reference (no color changes) === */
 /* Desktop: keep as-is (right aligned). Mobile: center on its own row below title */
-@media (max-width: 450px){
-    .header .auth-buttons{
+@media (max-width: 450px) {
+    .header .auth-buttons {
         position: relative;
-        width:100%;
-        justify-content:center;
-        margin-top: 8px;   /* ensure it sits below the title */
-        gap:10px;
+        width: 100%;
+        justify-content: center;
+        margin-top: 8px; /* ensure it sits below the title */
+        gap: 10px;
     }
-    .header .auth-buttons .auth-btn{
-        border-radius:12px;      /* only shape, keep theme colors */
-        padding:10px 16px;
-        min-width:118px;
+    .header .auth-buttons .auth-btn {
+        border-radius: 12px; /* only shape, keep theme colors */
+        padding: 10px 16px;
+        min-width: 118px;
     }
 }
 
 /* micro-fix to prevent overlap with absolute-centered title */
-.header h1{ z-index:1; }
-.header .menu-toggle{ z-index:2; }
-.header .auth-buttons{ z-index:1; }
-
+.header h1 {
+    z-index: 1;
+}
+.header .menu-toggle {
+    z-index: 2;
+}
+.header .auth-buttons {
+    z-index: 1;
+}
 
 /* === Auth Buttons: pill design, green background (photo reference) === */
 .auth-btn {
@@ -1775,60 +1825,70 @@ header + .gx-marquee {
     transform: scale(0.96);
 }
 
-
 /* === HEADER LAYOUT: match reference (logo centered, buttons in second row, hamburger left) === */
 /* Increase header offset so content doesn't hide behind fixed header */
-:root { --header-h: 150px; }
+:root {
+    --header-h: 150px;
+}
 
 /* Stack header content vertically */
-.header-inner{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:10px;
-    position:relative;
+.header-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
 }
 
 /* Center title normally (undo any absolute centering) */
-.header h1{
+.header h1 {
     position: static;
     transform: none;
     margin: 0;
 }
 
 /* Place hamburger at the very left, vertically aligned with title */
-.header .menu-toggle{
-    position:absolute;
-    left:12px;
-    top:14px;
-    width:36px; height:36px;
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:6px;
-    background:transparent;
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:5px; cursor:pointer;
+.header .menu-toggle {
+    position: absolute;
+    left: 12px;
+    top: 14px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
 }
 
 /* Second row: auth buttons centered, full-width container */
-.header .auth-buttons{
-    width:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
+.header .auth-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 /* Keep wrapping nicely on small screens */
-@media (max-width:450px){
-    .header .auth-buttons .auth-btn{ flex:1 1 auto; min-width:120px; }
+@media (max-width: 450px) {
+    .header .auth-buttons .auth-btn {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
 }
 
-
 /* === HEADER LAYOUT (match provided screenshot) === */
-:root { --header-h: 150px; }
+:root {
+    --header-h: 150px;
+}
 
-.header-inner{
+.header-inner {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1837,28 +1897,46 @@ header + .gx-marquee {
     gap: 8px;
 }
 .header .menu-toggle,
-.header .nav-back{
+.header .nav-back {
     position: absolute;
     top: 12px;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,.12);
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 6px;
     background: transparent;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
 }
-.header .menu-toggle{ left: 12px; }
-.header .menu-toggle span{ width:20px;height:2px;background:#fff;border-radius:2px; display:block; }
-.header .menu-toggle span + span{ margin-top:5px; }
-.header .nav-back{ left: 56px; font-size: 18px; line-height: 1; color:#fff; }
+.header .menu-toggle {
+    left: 12px;
+}
+.header .menu-toggle span {
+    width: 20px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    display: block;
+}
+.header .menu-toggle span + span {
+    margin-top: 5px;
+}
+.header .nav-back {
+    left: 56px;
+    font-size: 18px;
+    line-height: 1;
+    color: #fff;
+}
 
-.header h1{
+.header h1 {
     position: static;
     transform: none;
     margin: 0;
 }
 
-.header .auth-buttons{
+.header .auth-buttons {
     width: 100%;
     display: flex;
     align-items: center;
@@ -1866,77 +1944,86 @@ header + .gx-marquee {
     gap: 10px;
 }
 
-@media (max-width: 450px){
-    .header .auth-buttons .auth-btn{ flex: 1 1 auto; min-width: 120px; }
+@media (max-width: 450px) {
+    .header .auth-buttons .auth-btn {
+        flex: 1 1 auto;
+        min-width: 120px;
+    }
 }
 
-
 /* === Fix: Keep game tabs side-by-side on small screens === */
-@media (max-width: 450px){
-    .game-tabs{
+@media (max-width: 450px) {
+    .game-tabs {
         flex-direction: row !important;
         flex-wrap: nowrap;
     }
-    .game-tab{
+    .game-tab {
         margin-bottom: 0;
     }
 }
 
-
-.header .auth-buttons{
+.header .auth-buttons {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    width: 100vw;                           /* viewport full width */
-    margin-left: calc(50% - 50vw);          /* full-bleed (no side margins) */
+    width: 100vw; /* viewport full width */
+    margin-left: calc(50% - 50vw); /* full-bleed (no side margins) */
     margin-right: calc(50% - 50vw);
     padding: 0;
     box-sizing: border-box;
 }
-.header .auth-buttons .auth-btn{
-    width: 100%;                             /* stretch each cell */
+.header .auth-buttons .auth-btn {
+    width: 100%; /* stretch each cell */
     justify-content: center;
 }
 /* keep it even on very small screens */
-@media (max-width: 350px){
-    .header .auth-buttons{ gap: 6px; }
-    .header .auth-buttons .auth-btn{ padding: 10px 8px; }
+@media (max-width: 350px) {
+    .header .auth-buttons {
+        gap: 6px;
+    }
+    .header .auth-buttons .auth-btn {
+        padding: 10px 8px;
+    }
 }
 
 /* === Auth bar: two buttons full-bleed with slight side margins === */
-.header .auth-buttons{
+.header .auth-buttons {
     display: grid !important;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     width: 100%;
     margin: 0;
-    padding: 0 12px;          /* slight left/right padding */
+    padding: 0 12px; /* slight left/right padding */
     box-sizing: border-box;
 }
-.header .auth-buttons .auth-btn{
+.header .auth-buttons .auth-btn {
     width: 100%;
     justify-content: center;
 }
-@media (max-width: 350px){
-    .header .auth-buttons{ gap: 6px; padding: 0 8px; }
-    .header .auth-buttons .auth-btn{ padding: 10px 8px; }
+@media (max-width: 350px) {
+    .header .auth-buttons {
+        gap: 6px;
+        padding: 0 8px;
+    }
+    .header .auth-buttons .auth-btn {
+        padding: 10px 8px;
+    }
 }
-
 
 /* === Auth Buttons with Icons === */
 .auth-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;                        /* 아이콘과 텍스트 간격 */
-    font-family: "Noto Sans KR", sans-serif;  /* 사진과 비슷한 깔끔한 한글 폰트 */
+    gap: 8px; /* 아이콘과 텍스트 간격 */
+    font-family: "Noto Sans KR", sans-serif; /* 사진과 비슷한 깔끔한 한글 폰트 */
     font-weight: 600;
     font-size: 15px;
 }
 
 /* 로그인 버튼 아이콘 */
 #loginBtn::before {
-    content: "\f090";               /* Font Awesome: fa-sign-in-alt */
+    content: "\f090"; /* Font Awesome: fa-sign-in-alt */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 14px;
@@ -1944,15 +2031,47 @@ header + .gx-marquee {
 
 /* 회원가입 버튼 아이콘 */
 #registerBtn::before {
-    content: "\f234";               /* Font Awesome: fa-user-plus */
+    content: "\f234"; /* Font Awesome: fa-user-plus */
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     font-size: 14px;
 }
 
-
 /* === Global Font: apply Noto Sans KR site-wide === */
-body, h1, h2, h3, h4, h5, h6, button, input, textarea {
+body,
+button,
+input,
+select,
+textarea {
     font-family: "Noto Sans KR", sans-serif !important;
 }
 
+/* === Global base font: Noto Sans KR === */
+:root {
+    --app-font: "Noto Sans KR", sans-serif;
+}
+html,
+body,
+button,
+input,
+select,
+textarea {
+    font-family: var(--app-font) !important;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+li,
+dt,
+dd,
+small,
+strong,
+label {
+    font-family: var(--app-font) !important;
+}
