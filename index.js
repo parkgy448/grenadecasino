@@ -2902,44 +2902,41 @@ window.updateUserBalance = updateUserBalance;
 window.addEventListener("DOMContentLoaded", fitPopupToViewport);
 window.addEventListener("resize", fitPopupToViewport);
 
-
 /* ===== Hamburger toggle (no side effects) ===== */
-document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.getElementById('menuToggle');
-    if(btn){
-        btn.addEventListener('click', function(){
-            var expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', (!expanded).toString());
-            document.body.classList.toggle('menu-open');
+document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById("menuToggle");
+    if (btn) {
+        btn.addEventListener("click", function () {
+            var expanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", (!expanded).toString());
+            document.body.classList.toggle("menu-open");
         });
     }
 });
-
 
 /* Header hamburger aria toggle only */
-document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.getElementById('menuToggle');
-    if(btn){
-        btn.addEventListener('click', function(){
-            var expanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', (!expanded).toString());
+document.addEventListener("DOMContentLoaded", function () {
+    var btn = document.getElementById("menuToggle");
+    if (btn) {
+        btn.addEventListener("click", function () {
+            var expanded = this.getAttribute("aria-expanded") === "true";
+            this.setAttribute("aria-expanded", (!expanded).toString());
         });
     }
 });
 
-
 // ===== Banner Swipe (Touch) =====
-(function(){
+(function () {
     const banner = document.getElementById("banner");
-    if(!banner) return;
+    if (!banner) return;
     const bannerImages = banner.querySelectorAll("img");
     let currentIndex = 0;
     let startX = 0;
     let endX = 0;
 
-    function showBanner(index){
+    function showBanner(index) {
         bannerImages.forEach((img, i) => {
-            if(i === index) img.classList.add("active");
+            if (i === index) img.classList.add("active");
             else img.classList.remove("active");
         });
     }
@@ -2949,55 +2946,90 @@ document.addEventListener('DOMContentLoaded', function(){
     });
     banner.addEventListener("touchend", (e) => {
         endX = e.changedTouches[0].clientX;
-        if(startX - endX > 50){
+        if (startX - endX > 50) {
             currentIndex = (currentIndex + 1) % bannerImages.length;
             showBanner(currentIndex);
-        } else if(endX - startX > 50){
+        } else if (endX - startX > 50) {
             currentIndex = (currentIndex - 1 + bannerImages.length) % bannerImages.length;
             showBanner(currentIndex);
         }
     });
 })();
 
-
-
 // === Banner Swipe (touch/mouse) ===
-(function(){
-    var banner = document.querySelector('.banner-container .banner');
-    if(!banner) return;
-    var imgs = banner.querySelectorAll('img');
-    if(!imgs.length) return;
+(function () {
+    var banner = document.querySelector(".banner-container .banner");
+    if (!banner) return;
+    var imgs = banner.querySelectorAll("img");
+    if (!imgs.length) return;
     var current = 0;
     var startX = 0;
     var distX = 0;
     var threshold = 40; // px
 
-    function show(idx){
-        imgs.forEach(function(img, i){ img.classList.toggle('active', i === idx); });
+    function show(idx) {
+        imgs.forEach(function (img, i) {
+            img.classList.toggle("active", i === idx);
+        });
     }
 
-    function onStart(x){ startX = x; distX = 0; }
-    function onMove(x){ distX = x - startX; }
-    function onEnd(){
+    function onStart(x) {
+        startX = x;
+        distX = 0;
+    }
+    function onMove(x) {
+        distX = x - startX;
+    }
+    function onEnd() {
         if (Math.abs(distX) < threshold) return;
-        if (distX < 0) { // swipe left -> next
+        if (distX < 0) {
+            // swipe left -> next
             current = (current + 1) % imgs.length;
-        } else { // swipe right -> prev
+        } else {
+            // swipe right -> prev
             current = (current - 1 + imgs.length) % imgs.length;
         }
         show(current);
     }
 
     // touch
-    banner.addEventListener('touchstart', function(e){ onStart(e.touches[0].clientX); }, {passive:true});
-    banner.addEventListener('touchmove', function(e){ onMove(e.touches[0].clientX); }, {passive:true});
-    banner.addEventListener('touchend', function(e){ onEnd(); }, {passive:true});
+    banner.addEventListener(
+        "touchstart",
+        function (e) {
+            onStart(e.touches[0].clientX);
+        },
+        { passive: true }
+    );
+    banner.addEventListener(
+        "touchmove",
+        function (e) {
+            onMove(e.touches[0].clientX);
+        },
+        { passive: true }
+    );
+    banner.addEventListener(
+        "touchend",
+        function (e) {
+            onEnd();
+        },
+        { passive: true }
+    );
 
     // mouse (drag) for desktop
     var dragging = false;
-    banner.addEventListener('mousedown', function(e){ dragging = true; onStart(e.clientX); });
-    window.addEventListener('mousemove', function(e){ if(dragging) onMove(e.clientX); });
-    window.addEventListener('mouseup', function(e){ if(dragging){ dragging = false; onEnd(); }});
+    banner.addEventListener("mousedown", function (e) {
+        dragging = true;
+        onStart(e.clientX);
+    });
+    window.addEventListener("mousemove", function (e) {
+        if (dragging) onMove(e.clientX);
+    });
+    window.addEventListener("mouseup", function (e) {
+        if (dragging) {
+            dragging = false;
+            onEnd();
+        }
+    });
 
     // if there are indicators already managed elsewhere, leave them; otherwise optional:
     // (no indicator sync to avoid touching other code)
