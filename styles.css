@@ -2075,3 +2075,11 @@ strong,
 label {
     font-family: var(--app-font) !important;
 }
+
+
+/* Remove banner arrows */
+.banner-controls, .banner-arrow { display: none !important; }
+
+
+/* === Banner: hide arrow controls, enable swipe-only === */
+.banner-controls, .banner-arrow { display: none !important; }
