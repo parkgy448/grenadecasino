@@ -153,6 +153,11 @@ body::after {
         transform: rotate(360deg);
     }
 }
+header h1 img {
+    width:150px;  /* Set the width to a fixed value */
+    height: auto;
+}
+
 
 .header h1 {
     margin: 0;
