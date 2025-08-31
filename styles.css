@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap");
 :root {
     --header-h: 90px;
+    --send-size: 44px;
     --grenade-green: #2ecc71;
     --grenade-dark-green: #27ae60;
     --grenade-yellow: #f1c40f;
@@ -2179,14 +2180,6 @@ label {
     flex-direction: column;
     gap: 10px;
 }
-#csModal .chat-messages {
-    height: 320px;
-    overflow: auto;
-    padding: 12px;
-    background: #0d0d0d;
-    border: 1px solid #222;
-    border-radius: 10px;
-}
 #csModal .chat-input-area textarea {
     resize: none;
 }
@@ -2275,6 +2268,12 @@ label {
     gap: 8px;
 }
 
+#csModal .chat-message {
+    display: flex;
+    flex-direction: row; /* 한 행은 가로로 배치 */
+    align-items: flex-end;
+    width: 80%;
+}
 /* Scrollbar */
 #csModal .chat-messages::-webkit-scrollbar {
     width: 10px;
@@ -2487,16 +2486,32 @@ label {
 #csModal .message-admin {
     justify-content: flex-start;
 }
+#csModal .chat-message .msg-text {
+    max-width: 55%;
+    color: #eafff7;
+    font-size: 14px;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+#csModal .message-user .msg-text {
+    color: #baffcd;
+}
 
 #csModal .chat-message .bubble {
-    max-width: 72%;
+    max-width: 55% !important;
     padding: 10px 12px;
     border-radius: 14px;
     line-height: 1.5;
     font-weight: 500;
     letter-spacing: 0.2px;
     word-break: break-word;
+    white-space: pre-wrap;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+@media (max-width: 500px) {
+    #csModal .chat-message .bubble {
+        max-width: 70% !important;
+    }
 }
 
 #csModal .message-user .bubble {
@@ -2548,24 +2563,43 @@ label {
 /* Input */
 #csModal .chat-input-area.cs-input {
     display: flex;
-    gap: 10px;
-    align-items: flex-end;
-    background: linear-gradient(180deg, rgba(8, 13, 11, 0.65), rgba(8, 13, 11, 0.9));
-    border: 1px solid rgba(0, 217, 95, 0.18);
-    border-radius: 12px;
-    padding: 10px;
+    align-items: center; /* 세로 중앙 정렬 */
+    gap: 8px;
+    background: transparent; /* 테두리/배경 톤 다운 */
+    border: none;
+    padding: 0;
 }
 #csModal .chat-input-area.cs-input textarea {
-    flex: 1;
+    flex: 1 1 auto;
+    height: var(--send-size);
+    min-height: var(--send-size);
+    max-height: var(--send-size);
     resize: none;
-    min-height: 56px;
-    max-height: 160px;
+    border-radius: 9999px; /* iOS 느낌의 필 */
+    padding: 0 12px;
+    line-height: calc(var(--send-size) - 2px);
     background: #0a120f;
     border: 1px solid rgba(0, 217, 95, 0.2);
     color: #eafff7;
-    border-radius: 10px;
-    padding: 10px 12px;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+#csModal .send-btn {
+    width: var(--send-size);
+    height: var(--send-size);
+    flex: 0 0 var(--send-size);
+    padding: 0;
+    border: none;
+    background: transparent;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+#csModal .send-btn img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover; /* 아이콘 원형 꽉 채우기 */
+    border-radius: 50%;
 }
 #csModal .chat-input-area.cs-input textarea::placeholder {
     color: #78e7b4;
@@ -2591,4 +2625,286 @@ label {
     color: #9ef6c2;
     opacity: 0.8;
     font-size: 14px;
+}
+
+/* === Frog Casino — Minimal Customer Center Theme (Overrides) === */
+.modal-content.cs.cs-minimal {
+    background: #0e1210; /* deep dark */
+    border: 1px solid rgba(52, 255, 139, 0.18);
+    border-radius: 14px;
+    box-shadow: none; /* remove heavy glow */
+}
+
+.cs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(52, 255, 139, 0.14);
+    background: transparent; /* no gradient */
+}
+
+.cs-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.cs-heading h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+.cs-heading .cs-sub {
+    margin-top: 2px;
+    font-size: 12px;
+    color: #9acfb6;
+}
+.frog-logo {
+    font-size: 18px;
+    line-height: 1;
+}
+.dot.online {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #21d676;
+    margin-right: 6px;
+}
+
+.cs-body {
+    padding: 14px 16px;
+}
+
+.chat-messages {
+    background: #0b0f0d;
+    border: 1px solid rgba(52, 255, 139, 0.1);
+    border-radius: 12px;
+    height: 380px;
+    overflow: auto;
+    padding: 10px;
+}
+
+/* Minimal bubbles */
+.chat-message {
+    display: flex;
+    margin: 6px 0;
+}
+.chat-message .bubble {
+    display: inline-block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+    box-shadow: none;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    background: #161b18;
+    color: #e7f7ef;
+}
+.message-user .bubble {
+    background: #22d676; /* solid frog green */
+    color: #07120e; /* dark text for contrast */
+    border-color: rgba(0, 0, 0, 0.12);
+}
+.message-admin .bubble {
+    background: #141a16;
+    color: #e5f5ee;
+    border-color: rgba(255, 255, 255, 0.06);
+}
+.message-time {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #7aa991;
+}
+
+/* Input area */
+.cs-input {
+    margin-top: 12px;
+    display: grid;
+    gap: 8px;
+}
+.cs-input textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 72px;
+    max-height: 180px;
+    background: #0b0f0d;
+    color: #e7f7ef;
+    border: 1px solid rgba(52, 255, 139, 0.12);
+    border-radius: 12px;
+    padding: 12px 12px;
+    outline: none;
+}
+.cs-input textarea:focus {
+    border-color: #22d676;
+    box-shadow: 0 0 0 2px rgba(34, 214, 118, 0.18);
+}
+.cs-input .btn.cs-send {
+    width: 100%;
+    background: #22d676;
+    color: #07120e;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 0;
+    font-weight: 800;
+}
+.cs-input .btn.cs-send:hover {
+    filter: brightness(0.96);
+}
+
+/* Reduce scrollbar visuals */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+}
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* === Frog Casino — iOS-like Minimal Chat (Overrides) === */
+
+/* Input area layout: textarea + small circular send button */
+.cs-input {
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: end;
+}
+.cs-input textarea {
+    width: 100%;
+    resize: vertical;
+    min-height: 52px;
+    max-height: 160px;
+    background: #0b0f0d;
+    color: #e7f7ef;
+    border: 1px solid rgba(52, 255, 139, 0.12);
+    border-radius: 16px;
+    padding: 12px 14px;
+    outline: none;
+    font-size: 14px;
+}
+.cs-input textarea::placeholder {
+    color: #7aa991;
+    opacity: 0.7;
+}
+.cs-input textarea:focus {
+    border-color: #22d676;
+    box-shadow: 0 0 0 2px rgba(34, 214, 118, 0.18);
+}
+
+.cs-input .btn.cs-send.icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #22d676;
+    color: #06120d;
+    border: none;
+    box-shadow: none;
+}
+.cs-input .btn.cs-send.icon:hover {
+    filter: brightness(0.96);
+}
+.cs-input .btn.cs-send.icon:active {
+    transform: scale(0.98);
+}
+
+/* Message list container */
+.cs-body {
+    padding: 14px 16px;
+}
+.chat-messages {
+    background: transparent;
+    border: 1px solid rgba(52, 255, 139, 0.1);
+    border-radius: 16px;
+    height: 420px;
+    overflow: auto;
+    padding: 12px;
+}
+
+/* iOS-like bubble style — super simple */
+.chat-message {
+    display: flex;
+    margin: 6px 0;
+}
+.message-user {
+    justify-content: flex-end;
+}
+.message-admin {
+    justify-content: flex-start;
+}
+
+.chat-message .bubble {
+    max-width: 72%;
+    padding: 10px 12px;
+    border-radius: 18px;
+    font-weight: 500;
+    line-height: 1.4;
+    box-shadow: none;
+    border: none;
+    background: #151a17;
+    color: #e6f7ee;
+}
+
+/* user (mine): frog green like iOS blue */
+.message-user .bubble {
+    background: #22d676;
+    color: #05100b;
+}
+
+/* corner rounding to mimic iOS (no tails for simplicity) */
+.message-user .bubble {
+    border-radius: 18px 18px 4px 18px;
+}
+.message-admin .bubble {
+    border-radius: 18px 18px 18px 4px;
+}
+
+.message-time {
+    margin-top: 2px;
+    font-size: 11px;
+    color: #7aa991;
+    opacity: 0.8;
+}
+
+/* hide time by default to keep clean; show on hover */
+.chat-message .message-time {
+    display: none;
+}
+.chat-message:hover .message-time {
+    display: block;
+}
+
+/* slim scrollbar */
+.chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
+}
+.chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+#csModal .message-user {
+    justify-content: flex-end;
+}
+#csModal .message-admin {
+    justify-content: flex-start;
+}
+
+#csModal .chat-message .message-time {
+    margin-left: 6px;
+    font-size: 11px;
+    color: #7aa991;
+    white-space: nowrap; /* 시간 줄바꿈 방지 */
+    align-self: flex-end;
 }
