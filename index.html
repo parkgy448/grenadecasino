@@ -599,20 +599,29 @@
 
 <!-- 고객센터 채팅 모달 -->
 <div class="modal" id="csModal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3 class="modal-title">고객센터 1:1 상담</h3>
-            <button class="close-btn">×</button>
+    <div class="modal-content cs cs-minimal">
+        <div class="cs-header">
+            <div class="cs-title">
+                <div class="frog-logo" aria-hidden="true">🐸</div>
+                <div class="cs-heading">
+                    <h3>개구리카지노 고객센터</h3>
+                    <div class="cs-sub"><span class="dot online" aria-label="상담원 온라인"></span> 24시간 상담</div>
+                </div>
+            </div>
+            <button class="close-btn" onclick="closeModal('csModal')" aria-label="닫기">✕</button>
         </div>
-        <div class="modal-body">
-            <div class="chat-container" id="chatContainer">
-                <div class="chat-messages" id="chatMessages">
-                    <div class="no-chat">상담원과 연결 중입니다...</div>
-                </div>
-                <div class="chat-input-area">
-                    <textarea id="chatInput" placeholder="메시지를 입력하세요..." class="form-control" rows="3"></textarea>
-                    <button id="sendMessageBtn" class="btn" style="margin-top: 10px;">전송</button>
-                </div>
+
+        <div class="cs-body">
+            <!-- 초기 안내문 제거 -->
+            <div class="chat-messages" id="chatMessages"></div>
+
+            <!-- 입력 영역: 버튼/입력 높이 동일, 가로 정렬 -->
+            <div class="chat-input-area cs-input">
+                <textarea id="chatInput" placeholder="메시지를 입력하세요…" rows="1"></textarea>
+                <!-- 전송 버튼: 동그란 아이콘 버튼 -->
+                <button id="sendMessageBtn" class="send-btn" aria-label="전송" title="전송">
+                    <img src="7cd814e1-54e1-4340-bc30-e1f696561355.png" alt="" />
+                </button>
             </div>
         </div>
     </div>
