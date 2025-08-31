@@ -154,7 +154,7 @@ body::after {
     }
 }
 header h1 img {
-    width:150px;  /* Set the width to a fixed value */
+    width:130px;  /* Set the width to a fixed value */
     height: auto;
 }
 
