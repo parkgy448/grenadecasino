@@ -154,10 +154,9 @@ body::after {
     }
 }
 header h1 img {
-    width:130px;  /* Set the width to a fixed value */
+    width: 130px; /* Set the width to a fixed value */
     height: auto;
 }
-
 
 .header h1 {
     margin: 0;
@@ -2091,4 +2090,505 @@ label {
 .banner-controls,
 .banner-arrow {
     display: none !important;
+}
+
+/* === Exchange Modal UI polish === */
+#exchangeModal .modal-content {
+    max-width: 640px;
+}
+.exchange-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #222;
+}
+.exchange-tab {
+    flex: 1;
+    text-align: center;
+    padding: 10px 12px;
+    cursor: pointer;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-bottom: none;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    color: var(--text-gray);
+    font-weight: 700;
+    transition: all 0.2s ease;
+}
+.exchange-tab.active {
+    background: rgba(46, 204, 113, 0.12);
+    color: #fff;
+    box-shadow: inset 0 -2px 0 var(--grenade-green), 0 0 0 1px rgba(46, 204, 113, 0.25);
+}
+.exchange-tab-content {
+    display: none;
+}
+.exchange-tab-content.active {
+    display: block;
+}
+
+.exchange-history-header,
+.exchange-history-item {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 0.7fr;
+    gap: 12px;
+    align-items: center;
+}
+.exchange-history-header {
+    padding: 8px 12px;
+    color: var(--text-gray);
+    border-bottom: 1px solid #333;
+    font-weight: 700;
+}
+.exchange-history-list {
+    max-height: 260px;
+    overflow: auto;
+}
+.exchange-history-item {
+    padding: 10px 12px;
+    border-bottom: 1px solid #222;
+}
+.exchange-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.status-pending {
+    background: rgba(241, 196, 15, 0.15);
+    color: #f1c40f;
+}
+.status-completed {
+    background: rgba(46, 204, 113, 0.15);
+    color: var(--grenade-green);
+}
+.status-rejected {
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
+}
+
+/* === Customer Support (CS) Modal polish === */
+#csModal .modal-content {
+    max-width: 720px; /* override inline or default */
+}
+#csModal .chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#csModal .chat-messages {
+    height: 320px;
+    overflow: auto;
+    padding: 12px;
+    background: #0d0d0d;
+    border: 1px solid #222;
+    border-radius: 10px;
+}
+#csModal .chat-input-area textarea {
+    resize: none;
+}
+#csModal #sendMessageBtn.btn {
+    background: var(--grenade-green);
+    color: #0a0a0a;
+    border: none;
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+/* Small fix: generic header for "no-history" already exists above */
+
+/* === Frog Casino — Customer Center Redesign === */
+:root {
+    --frog-neon: #34ff8b;
+    --frog-neon-2: #00e37d;
+    --frog-deep: #0b1a12;
+    --frog-ink: #0a0d0a;
+    --frog-border: rgba(52, 255, 139, 0.35);
+    --frog-glow: 0 0 0.5rem rgba(52, 255, 139, 0.5), 0 0 1rem rgba(52, 255, 139, 0.25);
+}
+
+#csModal .modal-content.cs {
+    width: 520px;
+    max-width: 95vw;
+    background: radial-gradient(120% 120% at 0% 0%, rgba(52, 255, 139, 0.06) 0%, rgba(0, 0, 0, 0) 60%), var(--bg-darker);
+    border: 1px solid var(--frog-border);
+    border-radius: 20px;
+    box-shadow: var(--frog-glow);
+    overflow: hidden;
+}
+
+#csModal .cs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    background: linear-gradient(180deg, rgba(52, 255, 139, 0.08), rgba(0, 0, 0, 0));
+}
+
+#csModal .cs-brand {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+#csModal .frog-logo {
+    width: 36px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: radial-gradient(120% 120% at 30% 20%, var(--frog-neon) 0%, #119f52 60%, #0a3a22 100%);
+    box-shadow: inset 0 0 0.5rem rgba(0, 0, 0, 0.4), 0 0 0.6rem rgba(52, 255, 139, 0.35);
+    font-size: 20px;
+}
+#csModal .cs-header .title {
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 0.2px;
+}
+#csModal .cs-header .subtitle {
+    font-size: 12px;
+    color: var(--text-gray);
+    margin-top: 2px;
+}
+
+#csModal .cs-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#csModal .chat-messages {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0)), #0b0f0b;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    min-height: 360px;
+    max-height: 52vh;
+    overflow-y: auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Scrollbar */
+#csModal .chat-messages::-webkit-scrollbar {
+    width: 10px;
+}
+#csModal .chat-messages::-webkit-scrollbar-track {
+    background: transparent;
+}
+#csModal .chat-messages::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--frog-neon), var(--frog-neon-2));
+    border-radius: 12px;
+}
+
+#csModal .chat-message {
+    max-width: 80%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    line-height: 1.35;
+    position: relative;
+    display: inline-block;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+}
+
+#csModal .message-time {
+    font-size: 11px;
+    opacity: 0.7;
+    margin-top: 6px;
+}
+
+/* agent left */
+#csModal .message-admin {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* user right */
+#csModal .message-user {
+    align-self: flex-end;
+    color: #0a0a0a;
+    background: linear-gradient(135deg, var(--frog-neon), var(--frog-neon-2));
+    border: 1px solid rgba(52, 255, 139, 0.7);
+    box-shadow: 0 0 0.6rem rgba(52, 255, 139, 0.35);
+}
+
+#csModal .cs-quick {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#csModal .chip {
+    border: 1px solid var(--frog-border);
+    background: rgba(52, 255, 139, 0.06);
+    color: var(--text-light);
+    padding: 8px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s ease;
+}
+#csModal .chip:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--frog-glow);
+    background: rgba(52, 255, 139, 0.12);
+}
+
+#csModal .cs-input {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px;
+    align-items: end;
+}
+
+#csModal .cs-textarea {
+    resize: none;
+    min-height: 46px;
+    max-height: 140px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 12px 12px;
+    background: #0b0f0b;
+    color: var(--text-light);
+    outline: none;
+    box-shadow: inset 0 0 0 transparent;
+}
+#csModal .cs-textarea:focus {
+    border-color: var(--frog-border);
+    box-shadow: 0 0 0 0.15rem rgba(52, 255, 139, 0.18);
+}
+
+#csModal .btn.frog-send {
+    height: 46px;
+    padding: 0 18px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--frog-neon), var(--frog-neon-2));
+    color: #0a0a0a;
+    font-weight: 800;
+    border: 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.35), 0 0 0.6rem rgba(52, 255, 139, 0.35);
+}
+
+#csModal .no-chat {
+    opacity: 0.7;
+    font-size: 13px;
+    padding: 12px;
+}
+
+/* ===== Frog Casino CS Modal — full redesign ===== */
+#csModal .modal-content.cs {
+    max-width: 820px;
+    background: radial-gradient(1200px 600px at 100% -10%, rgba(51, 255, 102, 0.06), transparent 60%), radial-gradient(900px 500px at -20% 120%, rgba(0, 217, 95, 0.08), transparent 70%), #0b0f0c;
+    border: 1px solid rgba(0, 217, 95, 0.25);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 50px rgba(0, 217, 95, 0.06);
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+#csModal .cs-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    background: linear-gradient(180deg, rgba(8, 30, 19, 0.9), rgba(8, 20, 15, 0.9));
+    border-bottom: 1px solid rgba(0, 217, 95, 0.25);
+    position: relative;
+}
+#csModal .cs-header::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(51, 255, 102, 0.6), transparent);
+}
+#csModal .frog-logo {
+    font-size: 24px;
+    filter: drop-shadow(0 0 8px rgba(51, 255, 102, 0.75));
+    margin-right: 10px;
+}
+#csModal .cs-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+#csModal .cs-heading h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+    color: #bfffd3;
+    letter-spacing: 0.2px;
+}
+#csModal .cs-sub {
+    font-size: 12px;
+    color: #96f5be;
+    opacity: 0.85;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+#csModal .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+#csModal .dot.online {
+    background: #33ff66;
+    box-shadow: 0 0 0 2px rgba(51, 255, 102, 0.25), 0 0 12px rgba(51, 255, 102, 0.7);
+}
+
+#csModal .cs-body {
+    padding: 16px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Messages area */
+#csModal .chat-messages {
+    height: 360px;
+    overflow-y: auto;
+    background: linear-gradient(180deg, rgba(7, 12, 10, 0.6), rgba(7, 12, 10, 0.9));
+    border: 1px solid rgba(0, 217, 95, 0.18);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.65), inset 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+/* Scrollbar */
+#csModal .chat-messages::-webkit-scrollbar {
+    width: 10px;
+}
+#csModal .chat-messages::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 8px;
+}
+#csModal .chat-messages::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #28d17c, #16a34a);
+    border-radius: 8px;
+}
+
+/* Message bubbles */
+#csModal .chat-message {
+    display: flex;
+    margin: 8px 0;
+}
+#csModal .message-user {
+    justify-content: flex-end;
+}
+#csModal .message-admin {
+    justify-content: flex-start;
+}
+
+#csModal .chat-message .bubble {
+    max-width: 72%;
+    padding: 10px 12px;
+    border-radius: 14px;
+    line-height: 1.5;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    word-break: break-word;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.35);
+}
+
+#csModal .message-user .bubble {
+    background: linear-gradient(180deg, #34d399, #22c55e);
+    color: #07130b;
+    border: 1px solid rgba(6, 189, 98, 0.85);
+    border-top-right-radius: 4px;
+}
+#csModal .message-admin .bubble {
+    background: linear-gradient(180deg, #0f1714, #0a120f);
+    color: #d6ffe8;
+    border: 1px solid rgba(0, 217, 95, 0.25);
+    border-top-left-radius: 4px;
+}
+
+#csModal .message-time {
+    font-size: 11px;
+    opacity: 0.75;
+    color: #9ef6c2;
+    margin-top: 6px;
+}
+#csModal .message-user .message-time {
+    text-align: right;
+}
+
+/* Quick replies chips */
+#csModal .quick-replies {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    padding: 4px 2px 2px;
+}
+#csModal .quick-replies .chip {
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(51, 255, 102, 0.08);
+    border: 1px dashed rgba(0, 217, 95, 0.35);
+    color: #a7f3d0;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease;
+}
+#csModal .quick-replies .chip:hover {
+    transform: translateY(-1px);
+    background: rgba(51, 255, 102, 0.14);
+    box-shadow: 0 0 0 2px rgba(51, 255, 102, 0.12) inset;
+}
+
+/* Input */
+#csModal .chat-input-area.cs-input {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    background: linear-gradient(180deg, rgba(8, 13, 11, 0.65), rgba(8, 13, 11, 0.9));
+    border: 1px solid rgba(0, 217, 95, 0.18);
+    border-radius: 12px;
+    padding: 10px;
+}
+#csModal .chat-input-area.cs-input textarea {
+    flex: 1;
+    resize: none;
+    min-height: 56px;
+    max-height: 160px;
+    background: #0a120f;
+    border: 1px solid rgba(0, 217, 95, 0.2);
+    color: #eafff7;
+    border-radius: 10px;
+    padding: 10px 12px;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+#csModal .chat-input-area.cs-input textarea::placeholder {
+    color: #78e7b4;
+    opacity: 0.6;
+}
+
+#csModal .btn.cs-send {
+    background: linear-gradient(180deg, #36d666, #16a34a);
+    color: #07130b;
+    border: none;
+    border-radius: 10px;
+    font-weight: 800;
+    padding: 12px 18px;
+    min-width: 88px;
+    box-shadow: 0 6px 16px rgba(6, 189, 98, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+#csModal .btn.cs-send:active {
+    transform: translateY(1px);
+}
+
+/* No-chat placeholder */
+#csModal .no-chat {
+    color: #9ef6c2;
+    opacity: 0.8;
+    font-size: 14px;
 }
