@@ -119,6 +119,41 @@ function closeModal(modalId) {
     }
 }
 
+/* === Require login before opening game cards === */
+function guardGameCardsWithLogin() {
+    const cards = document.querySelectorAll(".game-card");
+
+    cards.forEach((card) => {
+        // Keyboard accessibility
+        if (!card.hasAttribute("tabindex")) card.setAttribute("tabindex", "0");
+
+        // Capture phase to intercept inline onclick handlers (e.g., showUnderMaintenance)
+        card.addEventListener(
+            "click",
+            (e) => {
+                const user = typeof auth !== "undefined" ? auth.currentUser : null;
+                if (!user) {
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+                    openModal("loginModal");
+                }
+            },
+            true
+        );
+
+        // Enter/Space key triggers
+        card.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+                const user = typeof auth !== "undefined" ? auth.currentUser : null;
+                if (!user) {
+                    e.preventDefault();
+                    openModal("loginModal");
+                }
+            }
+        });
+    });
+}
+
 /* Under Maintenance Alert */
 function showUnderMaintenance() {
     const alertBox = document.createElement("div");
@@ -139,7 +174,7 @@ function showUnderMaintenance() {
     alertBox.innerHTML = `
             <h3 style="color: var(--neon-blue); margin-bottom: 15px;">현재 점검 중입니다</h3>
             <p style="margin-bottom: 20px;">서비스 이용에 불편을 드려 죄송합니다.<br>보다 나은 서비스를 위해 시스템 점검을 진행 중입니다.</p>
-            <button id="closeAlert" style="background: var(--neon-blue); color: black; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; font-weight: 600;">확인</button>
+            <button id="closeAlert" style="background: #9AE66E; color: #ffffff; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 700;">확인</button>
         `;
 
     document.body.appendChild(alertBox);
@@ -2783,6 +2818,8 @@ document.addEventListener("DOMContentLoaded", function () {
     setupAdminTabs();
     setupLogin();
     setupRegister();
+    guardGameCardsWithLogin();
+
     document.getElementById("adminBackBtn").addEventListener("click", showMainPage);
 
     document.getElementById("adminBtn")?.addEventListener("click", function () {
