@@ -89,6 +89,32 @@ function createParticles() {
 }
 
 /* Modal control */
+
+function setupCsQuickReplies() {
+    const wrap = document.getElementById("csQuickReplies");
+    if (!wrap) return;
+    // quick reply chips
+    wrap.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", () => {
+            const t = document.getElementById("chatInput");
+            if (!t) return;
+            const text = chip.dataset.text || chip.textContent.trim();
+            t.value = t.value ? t.value.trimEnd() + " " + text : text;
+            t.focus();
+        });
+    });
+    // Enter to send (Shift+Enter for newline)
+    const input = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendMessageBtn");
+    if (input && sendBtn) {
+        input.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                sendBtn.click();
+            }
+        });
+    }
+}
 function openModal(modalId) {
     const modal = document.getElementById(modalId);
     if (!modal) return;
@@ -103,6 +129,7 @@ function openModal(modalId) {
     // 고객센터 모달만 특수 처리
     if (modalId === "csModal") {
         initCustomerChat();
+        setupCsQuickReplies();
     }
 }
 
@@ -174,7 +201,7 @@ function showUnderMaintenance() {
     alertBox.innerHTML = `
             <h3 style="color: var(--neon-blue); margin-bottom: 15px;">현재 점검 중입니다</h3>
             <p style="margin-bottom: 20px;">서비스 이용에 불편을 드려 죄송합니다.<br>보다 나은 서비스를 위해 시스템 점검을 진행 중입니다.</p>
-            <button id="closeAlert" style="background: #9AE66E; color: #ffffff; border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 700;">확인</button>
+            <button id="closeAlert" style="background:#9AE66E; color:#ffffff; padding:10px 18px; border:none; border-radius:20px; cursor:pointer; font-weight:700;">확인</button>
         `;
 
     document.body.appendChild(alertBox);
@@ -2412,14 +2439,18 @@ function loadChatMessages(chatId) {
 }
 
 function addMessageToChat(message, container) {
-    const messageDiv = document.createElement("div");
-    messageDiv.className = `chat-message ${message.sender === "admin" ? "message-admin" : "message-user"}`;
+    const row = document.createElement("div");
+    row.className = `chat-message ${message.sender === "admin" ? "message-admin" : "message-user"}`;
+
     const time = new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-    messageDiv.innerHTML = `
-        <div>${esc(message.text)}</div>
-        <div class="message-time">${time}</div>
-    `;
-    container.appendChild(messageDiv);
+
+    // 버블 없이 텍스트만
+    row.innerHTML = `
+  <div class="msg-text">${esc(message.text)}</div>
+  <div class="message-time">${time}</div>
+`;
+
+    container.appendChild(row);
 }
 
 function sendMessage() {
@@ -2683,17 +2714,11 @@ function closePopup() {
 function addMessageToAdminChat(message, container) {
     const messageDiv = document.createElement("div");
     messageDiv.className = `chat-message ${message.sender === "admin" ? "message-admin" : "message-user"}`;
-
-    const time = new Date(message.timestamp).toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-    });
-
+    const time = new Date(message.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
     messageDiv.innerHTML = `
-                    <div>${message.text}</div>
-                    <div class="message-time">${time}</div>
-                `;
-
+      <div class="bubble">${esc(message.text)}</div>
+      <div class="message-time">${time}</div>
+    `;
     container.appendChild(messageDiv);
 }
 /* function setupCopyButton() {
