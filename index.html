@@ -3,18 +3,6 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-            http-equiv="Content-Security-Policy"
-            content="
-        default-src 'self';
-        connect-src 'self' https://*.firebaseio.com https://firestore.googleapis.com https://identitytoolkit.googleapis.com https://ipapi.co https://api.ipify.org https://cdn.livechatinc.com;
-        img-src * data:;
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-        font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-        script-src 'self' 'unsafe-inline' https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.livechatinc.com https://api.livechatinc.com https://apis.google.com https://cdn.jsdelivr.net;
-        frame-src 'self' https://cloud-casino-34cc6.firebaseapp.com https://accounts.google.com https://apis.google.com https://secure.livechatinc.com;
-      "
-    />
 
     <meta http-equiv="Referrer-Policy" content="no-referrer" />
 
@@ -31,6 +19,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-functions-compat.js"></script>
 
     <!-- 메인 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bcryptjs@3.0/umd/index.min.js" defer></script>
@@ -684,53 +673,35 @@
     </div>
 </div>
 
-<!-- LiveChat 코드 -->
-<script>
-    window.__lc = window.__lc || {};
-    window.__lc.license = 19254040;
-    window.__lc.integration_name = "manual_onboarding";
-    window.__lc.product_name = "livechat";
-    (function (n, t, c) {
-        function i(n) {
-            return e._h ? e._h.apply(null, n) : e._q.push(n);
-        }
-        var e = {
-            _q: [],
-            _h: null,
-            _v: "2.0",
-            on: function () {
-                i(["on", c.call(arguments)]);
-            },
-            once: function () {
-                i(["once", c.call(arguments)]);
-            },
-            off: function () {
-                i(["off", c.call(arguments)]);
-            },
-            get: function () {
-                if (!e._h) throw new Error("[LiveChatWidget] You can't use getters before load.");
-                return i(["get", c.call(arguments)]);
-            },
-            call: function () {
-                i(["call", c.call(arguments)]);
-            },
-            init: function () {
-                var n = t.createElement("script");
-                n.async = !0;
-                n.type = "text/javascript";
-                n.src = "https://cdn.livechatinc.com/tracking.js";
-                t.head.appendChild(n);
-            },
-        };
-        if (!n.__lc.asyncInit) e.init();
-        n.LiveChatWidget = n.LiveChatWidget || e;
-    })(window, document, [].slice);
-</script>
-<noscript>
-    <a href="https://www.livechat.com/chat-with/19254040/" rel="nofollow">Chat with us</a>, powered by
-    <a href="https://www.livechat.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
-</noscript>
-<!-- End of LiveChat code -->
-<!--새버젼 v1-->
+<!-- 관리자: 비밀번호 변경 모달 -->
+<div class="modal" id="pwChangeModal" style="display: none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title">비밀번호 변경</h3>
+            <button class="close-btn" data-close-pwmodal>×</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>대상 회원</label>
+                <input id="pwTargetDisplay" class="form-control" type="text" disabled />
+            </div>
+            <div class="form-group">
+                <label>새 비밀번호 (임시)</label>
+                <input id="pwNew1" class="form-control" type="password" placeholder="영문/숫자/특수문자 조합 8~64자" />
+            </div>
+            <div class="form-group">
+                <label>새 비밀번호 확인</label>
+                <input id="pwNew2" class="form-control" type="password" placeholder="한 번 더 입력" />
+            </div>
+            <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                <input id="pwForceChangeNext" type="checkbox" />
+                <label for="pwForceChangeNext" style="margin: 0;">다음 로그인 시 비밀번호 변경 강제</label>
+            </div>
+            <button id="pwApplyBtn" class="btn">임시 비밀번호 적용</button>
+        </div>
+    </div>
+</div>
+
+<!-- adminSetPassword callable를 사용합니다: firebase/functions 초기화 필요 -->
 </body>
 </html>
