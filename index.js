@@ -1,3 +1,16 @@
+// === Helper: format Firebase Functions errors ===
+function formatFunctionsError(err) {
+    try {
+        if (!err) return "알 수 없는 오류";
+        const code = err.code || err.name || "unknown";
+        const msg = err.message || String(err);
+        const det = err.details ? "\n세부정보: " + (typeof err.details === "string" ? err.details : JSON.stringify(err.details)) : "";
+        return `[${code}] ${msg}${det}`;
+    } catch (e) {
+        return String(err);
+    }
+}
+
 function esc(str = "") {
     return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
@@ -24,6 +37,25 @@ const firebaseConfig = {
 // Firebase 초기화
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
+
+    // ---- CORS/region fix injection (safe to keep multiple times) ----
+    (function () {
+        try {
+            // Bind Cloud Functions to a single region to avoid implicit us-central1 calls
+            const _REGION = "asia-northeast3";
+            // Expose a stable helper on window
+            window.regionCallable = function (name) {
+                return firebase.app().functions(_REGION).httpsCallable(name);
+            };
+        } catch (e) {
+            console.warn("[regionCallable:init] skipped", e);
+        }
+    })();
+    // ---- end injection ----
+
+    // === Cloud Functions region binding (added) ===
+    const functions = firebase.app().functions("asia-northeast3");
+    const httpsCallable = (name) => functions.httpsCallable(name);
 }
 
 // Firestore 초기화
@@ -852,19 +884,28 @@ async function renderUserTable(users) {
                 </select>
             </td>
             <td>
-                <button class="admin-action-btn info" data-uid="${user.id}">정보</button>
-                ${
+  <button class="admin-action-btn info" data-uid="${user.id}">정보</button>
+  ${
             !user.isAdmin
                 ? `
-                    <button class="admin-action-btn block-ip" data-userid="${user.id}" data-ip="${user.ipAddress || ""}">IP 차단</button>
-                    <button class="admin-action-btn delete" data-userid="${user.id}">삭제</button>
-                    <button class="admin-action-btn" onclick="resetPassword('${esc(user.userId)}')">
-                        비밀번호 초기화
-                    </button>
-                `
+        <button class="admin-action-btn block-ip"
+                data-userid="${user.id}"
+                data-ip="${user.ipAddress || ""}">IP 차단</button>
+        <button class="admin-action-btn delete"
+                data-userid="${user.id}">삭제</button>
+
+        <!-- ✅ 비번 변경 버튼: 모달 열기 트리거 -->
+        <button class="admin-action-btn"
+                data-action="reset-pw"
+                data-uid="${user.id}"
+                data-userdoc="${user.id}"
+                data-userid="${esc(user.userId)}">
+          비번변경
+        </button>
+      `
                 : "관리자"
         }
-            </td>
+</td>
         `;
         tableBody.appendChild(row);
 
@@ -3095,4 +3136,94 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // if there are indicators already managed elsewhere, leave them; otherwise optional:
     // (no indicator sync to avoid touching other code)
+})();
+
+// ==== 관리자 - 비번변경 모달 & 호출 로직 ====
+(function () {
+    const pwModal = document.getElementById("pwChangeModal");
+    if (!pwModal) {
+        return;
+    } // 모달이 없으면 패스
+
+    const pwTargetDisplay = document.getElementById("pwTargetDisplay");
+    const pwNew1 = document.getElementById("pwNew1");
+    const pwNew2 = document.getElementById("pwNew2");
+    const pwForceChangeNext = document.getElementById("pwForceChangeNext");
+    const pwApplyBtn = document.getElementById("pwApplyBtn");
+
+    // 현재 선택된 대상(두 방식 모두 지원)
+    let TARGET = { uid: null, userDocId: null, loginId: null };
+
+    // 👉 프로젝트 인증 방식 선택 ("auth" | "firestore")
+    const PW_MODE = "auth"; // 필요 시 'firestore' 로 바꾸세요
+
+    // 관리자 테이블에서 "비번변경" 클릭 핸들러 (이벤트 위임)
+    document.addEventListener("click", (e) => {
+        const btn = e.target.closest('[data-action="reset-pw"]');
+        if (!btn) return;
+        TARGET = {
+            uid: btn.dataset.uid || null,
+            userDocId: btn.dataset.userdoc || null,
+            loginId: btn.dataset.userid || null,
+        };
+        if (pwTargetDisplay) {
+            pwTargetDisplay.value = TARGET.loginId || TARGET.uid || TARGET.userDocId || "(unknown)";
+        }
+        openPwModal();
+    });
+
+    function openPwModal() {
+        pwModal.style.display = "flex";
+    }
+    function closePwModal() {
+        pwModal.style.display = "none";
+        if (pwNew1) pwNew1.value = "";
+        if (pwNew2) pwNew2.value = "";
+        if (pwForceChangeNext) pwForceChangeNext.checked = false;
+    }
+    document.querySelector("[data-close-pwmodal]")?.addEventListener("click", closePwModal);
+    pwModal.addEventListener("click", (e) => {
+        if (e.target === pwModal) closePwModal();
+    });
+
+    function validatePassword(p) {
+        if (typeof p !== "string") return "비밀번호를 입력하세요";
+        if (p.length < 8 || p.length > 64) return "비밀번호는 8~64자로 설정하세요";
+        const classes = [/[a-z]/, /[A-Z]/, /\d/, /[^\w\s]/].reduce((acc, re) => acc + (re.test(p) ? 1 : 0), 0);
+        if (classes < 2) return "영문/숫자/특수문자 중 2종 이상을 포함하세요";
+        return null;
+    }
+
+    pwApplyBtn?.addEventListener("click", async () => {
+        try {
+            const p1 = pwNew1.value.trim();
+            const p2 = pwNew2.value.trim();
+            if (p1 !== p2) throw new Error("두 비밀번호가 일치하지 않습니다");
+            const msg = validatePassword(p1);
+            if (msg) throw new Error(msg);
+
+            // Firebase Functions Callable
+            if (!(window.firebase && firebase.functions)) {
+                throw new Error("Firebase Functions가 초기화되지 않았습니다");
+            }
+            const callSet = regionCallable("adminSetPassword");
+
+            const payload = {
+                mode: PW_MODE, // 'auth' 또는 'firestore'
+                uid: TARGET.uid,
+                userDocId: TARGET.userDocId,
+                loginId: TARGET.loginId,
+                newPassword: p1,
+                forceChangeNext: !!pwForceChangeNext.checked,
+            };
+
+            const { data } = await callSet(payload);
+
+            alert(`비밀번호 변경 완료\n대상: ${pwTargetDisplay?.value || ""}\n감사ID: ${data?.auditId || "-"}`);
+            closePwModal();
+        } catch (err) {
+            console.error(err);
+            alert(formatFunctionsError(err) || "처리 중 오류가 발생했습니다");
+        }
+    });
 })();
