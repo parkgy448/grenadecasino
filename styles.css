@@ -55,7 +55,7 @@ body::before {
     width: 100%;
     height: 100%;
     background: radial-gradient(circle at 70% 30%, rgba(46, 204, 113, 0.05) 0%, transparent 50%), radial-gradient(circle at 30% 70%, rgba(241, 196, 15, 0.05) 0%, transparent 50%),
-        repeating-radial-gradient(circle at center, rgba(46, 204, 113, 0.015) 0px, transparent 200px);
+    repeating-radial-gradient(circle at center, rgba(46, 204, 113, 0.015) 0px, transparent 200px);
     animation: bgPulse 12s ease-in-out infinite;
     pointer-events: none;
     z-index: -2;
@@ -2920,4 +2920,68 @@ label {
     color: #7aa991;
     white-space: nowrap; /* 시간 줄바꿈 방지 */
     align-self: flex-end;
+}
+
+/* === Admin Password Modal (추가) === */
+.modal#pwChangeModal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+#pwChangeModal .modal-content {
+    width: min(520px, 92vw);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+#pwChangeModal .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+}
+#pwChangeModal .modal-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+#pwChangeModal .close-btn {
+    border: 0;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+}
+#pwChangeModal .modal-body {
+    padding: 16px;
+    display: grid;
+    gap: 12px;
+}
+#pwChangeModal .form-group {
+    display: grid;
+    gap: 6px;
+}
+#pwChangeModal .form-control {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+}
+#pwChangeModal .btn {
+    height: 40px;
+    border-radius: 10px;
+    border: 0;
+    padding: 0 14px;
+    cursor: pointer;
+    background: #2f6feb;
+    color: #fff;
+    font-weight: 600;
+}
+#pwChangeModal .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
